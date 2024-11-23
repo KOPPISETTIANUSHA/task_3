@@ -1,0 +1,286 @@
+s<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taj Hostel</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image:url("taj1.png");
+            background-repeat: none;
+            background-size: 100% 100%;
+
+        }
+
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+       a{
+        text-decoration: none;
+        color:white;
+        padding:10px;
+       }
+       a.hover
+       {
+        background-color: blueviolet;
+        color:bisque;
+        border-radius: 10px;
+       }
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Layout Styles */
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .content div {
+            width: 20px;
+            margin-bottom: 20px;
+        }
+
+        .carousel-container {
+            width: 800px;
+            position: relative;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-images img {
+            width: 800px;
+            height:800px;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .carousel-button.prev {
+            left: 10px;
+        }
+
+        .carousel-button.next {
+            right: 10px;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .quiz-question {
+            font-size: 24px;
+        }
+
+        .quiz-options input {
+            margin: 10px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+
+            .content div {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            footer {
+                font-size: 14px;
+            }
+
+            .carousel-button {
+                font-size: 18px;
+            }
+
+            .quiz-question {
+                font-size: 20px;
+            }
+        }
+        .api-container{
+            
+            text-align: center;
+        }
+        .card
+        {
+           padding: 10px;
+            display: flex;
+            flex-direction: row;
+            border:20px;
+        }
+        #box1
+        {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Taj Hotel</h1>
+       <a href="">about us</a>
+       <a href="">contact us</a>
+    </header>
+
+        <!-- Image Carousel Section -->
+        <div class="carousel-container">
+            <div class="carousel-images" id="carousel-images" height="200px" width="200px">
+                <img src="https://www.ihcltata.com/content/dam/tajhotels/ihcl/taj/Taj-banner.jpg" alt="Room 1" >
+                <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/232048789.jpg?k=5daae5c6d3671e01f16bc330db48730b2d0644f89c2507325b4e71af0c0e73e9&o=&hp=1" alt="Room 2" >
+                <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/545841268.jpg?k=68afc3e0943bb4b7dfcd2e94f59cc9aa99fb3f9cd3ab03e6a9b937e009cc7d72&o=&hp=1" alt="Room 3" >
+                <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/545841268.jpg?k=68afc3e0943bb4b7dfcd2e94f59cc9aa99fb3f9cd3ab03e6a9b937e009cc7d72&o=&hp=1" alt="Room 4" >
+            </div>
+            <button class="carousel-button prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="carousel-button next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+        <h1 id="box1">Taj Hostel Amenities</h1>
+        <div class="card" style="width: 18rem;" margin-right="20px">
+            <img src="data:image/jpeg;base64,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" class="card-img-top" alt="..." height="300px">
+            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/3d/41/dd/mansion-social-event.jpg?w=700&h=-1&s=1" height="300px">
+            <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/103705059.jpg?k=9e078265b31ad1815a573da8ed2a665f863e3925e1efd730df703421868a2ada&o=&hp=1" height="300px">
+            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/29/10/d3/amd-reception.jpg?w=700&h=-1&s=1" height="300px">
+    
+          </div>
+        <!-- Interactive Quiz Section -->
+        <div class="quiz-container">
+            <h2>Interactive Quiz</h2>
+            <div id="quiz">
+                <p class="quiz-question" id="question"></p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="option" value="A"> A. <span id="optionA"></span></label><br>
+                    <label><input type="radio" name="option" value="B"> B. <span id="optionB"></span></label><br>
+                    <label><input type="radio" name="option" value="C"> C. <span id="optionC"></span></label><br>
+                    <label><input type="radio" name="option" value="D"> D. <span id="optionD"></span></label>
+                </div>
+                <button id="submit-btn">Submit</button>
+            </div>
+            <div id="result"></div>
+        </div>
+
+        <!-- Fetch Data from API (Joke API) -->
+        <div class="api-container" style="margin-top: 30px;" >
+            <h2>Random Joke</h2>
+            <p id="joke"></p>
+            <button onclick="fetchJoke()">Get New Joke</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Taj Hostel. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Image Carousel
+        let currentSlide = 0;
+
+        function moveSlide(direction) {
+            const slides = document.querySelectorAll(".carousel-images img");
+            currentSlide += direction;
+            if (currentSlide < 0) {
+                currentSlide = slides.length - 1;
+            } else if (currentSlide >= slides.length) {
+                currentSlide = 0;
+            }
+            const carouselImages = document.getElementById("carousel-images");
+            carouselImages.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        // Quiz Section
+        const questions = [
+            {
+                question: "What is the capital of India?",
+                options: { A:"New Delhi", B:"Mumbai", C:"Bangalore", D:"Chennai" },
+                answer: "A"
+            },
+            {
+                question: "'?",
+                options: { A:"sai", B:"Shakespeare", C:"Hemingway", D:"Austen" },
+                answer: "B"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        function loadQuestion() {
+            const questionData = questions[currentQuestionIndex];
+            document.getElementById("question").textContent = questionData.question;
+            document.getElementById("optionA").textContent = questionData.options.A;
+            document.getElementById("optionB").textContent = questionData.options.B;
+            document.getElementById("optionC").textContent = questionData.options.C;
+            document.getElementById("optionD").textContent = questionData.options.D;
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            if (selectedOption) {
+                const answer = selectedOption.value;
+                return answer === questions[currentQuestionIndex].answer;
+            }
+            return false;
+        }
+
+        document.getElementById("submit-btn").addEventListener("click", function () {
+            const isCorrect = checkAnswer();
+            document.getElementById("result").textContent = isCorrect ? "Correct!" : "Wrong answer, try again!";
+            if (isCorrect && currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            }
+        });
+
+        loadQuestion();
+
+        // Fetch Joke API
+        async function fetchJoke() {
+            const response = await fetch('https://official-joke-api.appspot.com/jokes/random');
+            const data = await response.json();
+            document.getElementById("joke").textContent = data.setup + " " + data.punchline;
+        }
+
+        // Initial Joke Fetch
+        fetchJoke();
+    </script>
+</body>
+
+</html>
